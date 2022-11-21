@@ -40,7 +40,37 @@ void  station_F(int id) {
     attendre(2);
 }
 
+void segment_AB(int id){
+    pthread_mutex_lock(&AB);
+    printf("metro %d dans le segment AB\n", id);
+    station_B(id);
+    pthread_mutex_unlock(&AB);
 
+}
+void segment_BC(int id){
+    pthread_mutex_lock(&BC);
+    printf("metro %d dans le segment BC\n", id);
+    station_C(id);
+    pthread_mutex_unlock(&BC);
+}
+void segment_CD(int id) {
+    pthread_mutex_lock(&CD);
+    printf("metro %d dans le segment CD\n", id);
+    station_D(id);
+    pthread_mutex_unlock(&CD);
+}
+void segment_EB(int id) {
+    pthread_mutex_lock(&EB);
+    printf("metro %d dans le segment EB\n", id);
+    station_B(id);
+    pthread_mutex_unlock(&EB);
+}
+void segment_FA(int id) {
+    pthread_mutex_lock(&FA);
+    printf("metro %d dans le segment FA\n", id);
+    station_A(id);
+    pthread_mutex_unlock(&FA);
+}
 
 void * metro(void * arg) {
     int id = abs(rand());
@@ -50,56 +80,24 @@ void * metro(void * arg) {
     switch(depart) {
         case 'A':
             station_A(id);
-            pthread_mutex_lock(&AB);
-            printf("metro %d dans le segment AB\n", id);
-            station_B(id);
-            pthread_mutex_unlock(&AB);
-            pthread_mutex_lock(&BC);
-            printf("metro %d dans le segment BC\n", id);
-            station_C(id);
-            pthread_mutex_unlock(&BC);
-            pthread_mutex_lock(&CD);
-            printf("metro %d dans le segment CD\n", id);
-            station_D(id);
-            pthread_mutex_unlock(&CD);
+            segment_AB(id);
+            segment_BC(id);
+            segment_CD(id);
             break;
         case 'F':
             station_F(id);
-            pthread_mutex_lock(&FA);
-            printf("metro %d dans le segment FA\n", id);
-            station_A(id);
-            pthread_mutex_unlock(&FA);
-            pthread_mutex_lock(&AB);
-            printf("metro %d dans le segment AB\n", id);
-            station_B(id);
-            pthread_mutex_unlock(&AB);
-            pthread_mutex_lock(&BC);
-            printf("metro %d dans le segment BC\n", id);
-            station_C(id);
-            pthread_mutex_unlock(&BC);
-            pthread_mutex_lock(&CD);
-            printf("metro %d dans le segment CD\n", id);
-            station_D(id);
-            pthread_mutex_unlock(&CD);
-
+            segment_FA(id);
+            segment_AB(id);
+            segment_BC(id);
+            segment_CD(id);
             break;
         case 'E':
             station_E(id);
-            pthread_mutex_lock(&EB);
-            printf("metro %d dans le segment EB\n", id);
-            station_B(id);
-            pthread_mutex_unlock(&EB);
-            pthread_mutex_lock(&BC);
-            printf("metro %d dans le segment BC\n", id);
-            station_C(id);
-            pthread_mutex_unlock(&BC);
-            pthread_mutex_lock(&CD);
-            printf("metro %d dans le segment CD\n", id);
-            station_D(id);
-            pthread_mutex_unlock(&CD);
+            segment_EB(id);
+            segment_BC(id);
+            segment_CD(id);
             break;
     }
-
 }
 int main(int argc,char ** argv) {
     srand(time(0));
