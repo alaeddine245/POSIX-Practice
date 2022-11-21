@@ -1,0 +1,3 @@
+/home/alaeddine/CLionProjects/TP2_POSIX/cmake-build-debug/CMakeFiles/TP2_POSIX.dir
+/home/alaeddine/CLionProjects/TP2_POSIX/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/alaeddine/CLionProjects/TP2_POSIX/cmake-build-debug/CMakeFiles/rebuild_cache.dir
