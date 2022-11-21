@@ -28,14 +28,12 @@ void  station_C(int id) {
     attendre(2);
 }
 void  station_D(int id) {
-    //sem_wait(&D);
     printf("metro %d dans la station D\n", id);
     attendre(2);
 }
 void  station_E(int id) {
     printf("metro %d dans la station E\n", id);
     attendre(2);
-    //sem_post(&B);
 }
 void  station_F(int id) {
     printf("metro %d dans la station F\n", id);
